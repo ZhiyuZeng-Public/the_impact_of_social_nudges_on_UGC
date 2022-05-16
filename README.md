@@ -6,9 +6,7 @@ All the code used to obtain the results in this paper is disclosed here. However
 ## Files
 Here, the authors provide two files written by Python:
 1. Empirical_Analyses.py
-   - It records the code to conduct empirical analyses about the experiments (e.g., Sections 4 and 5)
-   - The empirical analyses focus on how to obtain the reduced-form causal effects of social nudges. 
-1. Simulation_Analyses.py
-   - It records the code related to the social network model (e.g., Section 6)
-   - It includes calculating the overall effect of social nudges on production over the entire network in a long-term steady state, and solving the operational problems regarding social nudges.
+  - This file records the code to conduct empirical analyses about the experiments (e.g., Sections 4--5, and parameters estimation in Section 6). The empirical analyses focus on how to obtain the reduced-form causal effects of social nudges. Comments are added to to match code with tables and figures. 
+3. Simulation_Analyses.py
+  - This file records the code related to the social network model (Section 6), which includes calculating the overall effect of social nudges on production over the entire network in a long-term steady state, and solving the operational problems regarding social nudges. Comments are added to to match code with tables and figures. 
  
