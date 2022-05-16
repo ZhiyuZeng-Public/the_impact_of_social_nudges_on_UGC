@@ -6,6 +6,7 @@
 # In[1]:
 
 
+# Some basic Python packages need to be imported
 import pandas as pd 
 import numpy as np
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -79,6 +80,7 @@ outdegree_data.head()
 # In[10]:
 
 
+# Calculate the number of followers and the number of following
 temp1 = indegree_data.groupby('target_id').agg({'source_id':'count'}).reset_index()
 temp1.columns = ['target_id', 'source_id_cnt']
 temp2 = outdegree_data.groupby('target_id').agg({'second_stage_target_id':'count'}).reset_index()
@@ -95,6 +97,8 @@ provider_data[['source_id_cnt', 'second_stage_target_id_cnt']].fillna(0, inplace
 
 provider_data[['source_id_cnt', 'second_stage_target_id_cnt']].quantile([0.001,0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99, 0.999])
 
+
+# ### Table 38 Summary Statistics About the Sample Network
 
 # In[16]:
 
@@ -180,6 +184,8 @@ outdegree_data['diffusion_boost'] = outdegree_data['sum_mu']*d*p/(1-alpha_p)/(1-
 second_stage_production_boost = outdegree_data.groupby(['target_id']).agg({'diffusion_boost':'sum'}).reset_index()
 
 
+# ### Table 9 column (2)
+
 # In[27]:
 
 
@@ -214,6 +220,8 @@ outdegree_data['diffusion_boost'] = outdegree_data['sum_mu']*d*p/(1-alpha_p)/(1-
 
 second_stage_production_boost = outdegree_data.groupby(['target_id']).agg({'diffusion_boost':'sum'}).reset_index()
 
+
+# ### Table 9 column (3)
 
 # In[30]:
 
@@ -295,17 +303,14 @@ for i in [1,2,3,4,5,6,7,8,9,10,12,14,16,18,20,22,24,26,28,30]:
     relative_improvement_list.append(rel_imp)
 
 
-# In[38]:
+# ### Figure 5
+
+# In[39]:
 
 
 # plot
 X_0 = i_list
 Y_0 = relative_improvement_list
-
-
-# In[39]:
-
-
 plt.rcParams['axes.facecolor'] = 'white'
 plt.rcParams['savefig.facecolor'] = 'white'
 plt.figure(figsize=(16, 10), dpi=80, edgecolor='black') 
@@ -321,33 +326,6 @@ for i in range(20):
     plt.ylabel('Relative Improvement (%)', fontsize=26)
     plt.grid(True, linestyle = "-", color = "grey", linewidth = "0.5", alpha = 0.5)
     # plt.savefig('Rel_improvement.png', bbox_inches='tight')
-
-
-# In[6]:
-
-
-#
-font = {'family': 'Times New Roman', 'weight':'normal', 'size':26}
-X_0 = [1,2,3,4,5,6,7,8,9,10,12,14,16,18,20,22,24,26,28,30]
-Y_0 = [5.633530, 5.284508, 5.085645, 4.904212, 4.495706, 4.045889, 3.688940, 3.408085, 
-       3.172831, 2.974058, 2.657306, 2.424436, 2.244427, 2.091777, 1.955749,
-       1.828393, 1.702475, 1.574598, 1.458981, 1.354918]
-    
-plt.rcParams['axes.facecolor'] = 'white'
-plt.rcParams['savefig.facecolor'] = 'white'
-plt.figure(figsize=(16, 10), dpi=80, edgecolor='black') 
-plt.gca().spines['bottom'].set_color('grey')
-plt.gca().spines['top'].set_color('grey') 
-plt.gca().spines['right'].set_color('grey')
-plt.gca().spines['left'].set_color('grey')
-
-for i in range(20):
-    plt.plot(X_0[i], round(Y_0[i]*100), color = 'navy', marker = 'o', markersize = 12, alpha = 1)  
-    plt.xticks(np.arange(min(X_0), max(X_0)+1, 1.0))
-    plt.xlabel('Percentage of the Total Number of Edges that Receive Pushes (%), i.e., |K|', font)
-    plt.ylabel('Relative Improvement (%)', font)
-    plt.grid(True, linestyle = "-", color = "grey", linewidth = "0.5", alpha = 0.5)
-    #plt.savefig('Rel_improvement.png', bbox_inches='tight')
 
 
 # # Optimization example -- recommendating new friends
@@ -422,17 +400,14 @@ print(m_list)
 print(relative_improvement_list)
 
 
-# In[46]:
+# ### Figure 6
+
+# In[47]:
 
 
 # plot
 X_0 = m_list
 Y_0 = relative_improvement_list
-
-
-# In[47]:
-
-
 plt.rcParams['savefig.facecolor'] = 'white'
 plt.figure(figsize=(16, 10), dpi=80, edgecolor='black') 
 plt.gca().spines['bottom'].set_color('grey')

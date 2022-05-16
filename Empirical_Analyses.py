@@ -6,6 +6,7 @@
 # In[1]:
 
 
+# Some basic Python packages need to be imported
 import pandas as pd 
 import numpy as np
 import statsmodels.api as sm
@@ -32,6 +33,8 @@ pd.set_option('precision', 6)
 
 # # Load data
 
+# Since the authors have a Non-Disclosure Agreement with the platform where the field experiments were conducted, the data files below can not be revealed. The distributional information of the data is disclosed in Online Appendix G, and can also be found in the "data and code" folder in the supplement materials.
+
 # In[2]:
 
 
@@ -47,14 +50,15 @@ first_diffusion = pd.read_csv('social_nudge_first_exp_diffusion.csv')
 
 
 print(first_author_feature.columns)
-# 'author_id': user id of a provider
-# 'treatment': whether a provider was in the treatment condition, versus the control condition
-# 'author_gender': gender of a provider
-# 'author_follow_cnt': number of following on the day prior to the experiment
-# 'author_fans_cnt': number of followers on the day prior to the experiment
-# 'upload_days_a_week_prior': the number of days when they uploaded any video during the week prior to the experiment
-# 'upload_photo_cnt_a_week_prior': the number of videos they uploaded during the week prior to the experiment
-# 'logging_msg_cnt': number of social nudges received on the first reception day
+# Variables in the dataset first_author_feature: 
+# 'author_id': A provider's id 
+# 'treatment': Whether a provider was in the treatment condition (1), versus the control condition (0) 
+# 'author_gender': Gender of a provider. F if a provider is female and M if a provider is male 
+# 'author_follow_cnt': A provider's number of following on the day prior to the experiment 
+# 'author_fans_cnt': A provider's number of followers on the day prior to the experiment 
+# 'upload_days_a_week_prior': A provider's number of days when she uploaded any video during the week prior to the experiment
+# 'upload_photo_cnt_a_week_prior': A provider's number of videos they uploaded during the week prior to the experiment 
+# 'logging_msg_cnt': A provider's number of social nudges received on the first reception day
 
 
 # In[4]:
@@ -69,16 +73,17 @@ first_author_feature[['treatment', 'author_follow_cnt', 'author_gender',
 
 
 print(first_production.columns)
-# 'author_id': user id of a provider
-# 'treatment': whether a provider was in the treatment condition, versus the control condition
-# 'is_upload_logging_day': whether a provider uploaded any videos on Day 1 (the first reception day)
-# 'photo_id_cnt_fillzero_logging_day': the number of videos uploaded on Day 1 (the first reception day)
-# 'is_upload_next_day_1': whether a provider uploaded any videos on Day 2
-# 'photo_id_cnt_fillzero_next_day_1': the number of videos uploaded on Day 2
-# 'is_upload_next_day_2': whether a provider uploaded any videos on Day 3
-# 'photo_id_cnt_fillzero_next_day_2': the number of videos uploaded on Day 3 
-# 'is_upload_next_day_3': whether a provider uploaded any videos on Day 4
-# 'photo_id_cnt_fillzero_next_day_3': the number of videos uploaded on Day 4
+# Variables in the dataset first_production:
+# 'author_id': A provider's if
+# 'treatment': Whether a provider was in the treatment condition (1), versus the control condition (0)
+# 'is_upload_logging_day': Whether a provider uploaded any videos on Day 1 (the first reception day)
+# 'photo_id_cnt_fillzero_logging_day': The number of videos uploaded on Day 1 (the first reception day)
+# 'is_upload_next_day_1': Whether a provider uploaded any videos on Day 2
+# 'photo_id_cnt_fillzero_next_day_1': The number of videos uploaded on Day 2
+# 'is_upload_next_day_2': Whether a provider uploaded any videos on Day 3
+# 'photo_id_cnt_fillzero_next_day_2': The number of videos uploaded on Day 3 
+# 'is_upload_next_day_3': Whether a provider uploaded any videos on Day 4
+# 'photo_id_cnt_fillzero_next_day_3': The number of videos uploaded on Day 4
 
 
 # In[6]:
@@ -91,9 +96,10 @@ first_production.describe()
 
 
 print(first_nudge_feature.columns)
-# 'author_id': user id of a provider
-# 'treatment': whether a provider was in the treatment condition, versus the control condition
-# 'is_bi_follow': whether the nudge sender was also following the provider
+# Variables in the dataset first_nudge_feature:
+# 'author_id': A provider' id
+# 'treatment': Whether a provider was in the treatment condition, versus the control condition
+# 'is_bi_follow': Whether the nudge sender was also following the provider
 
 
 # In[8]:
@@ -106,9 +112,10 @@ first_nudge_feature['is_bi_follow'].describe()
 
 
 print(first_author_historic_consumption.columns)
-# 'author_id': user id of a provider
-# 'treatment': whether a provider was in the treatment condition, versus the control condition
-# 'his_like_per_play_2018': the total number of likes provider i received from January 1, 2018, 
+# Variables in the dataset first_author_historic_consumption:
+# 'author_id': A provider's id
+# 'treatment': Whether a provider was in the treatment condition, versus the control condition
+# 'his_like_per_play_2018': The total number of likes provider i received from January 1, 2018, 
 # to the day prior to the experiment, divided by the total number of views provider i received during that same period
 
 
@@ -122,13 +129,14 @@ first_author_historic_consumption['his_like_per_play_2018'].describe()
 
 
 print(first_logging_consumption.columns)
-# 'author_id': user id of a provider
-# 'treatment': whether a provider was in the treatment condition, versus the control condition
-# 'sum_play_cnt': the total number of views each provider engendered that could be attributed to videos they uploaded on the first reception day
-# 'avg_complete_per_play_ratio': the average percentage of times viewers watched a video until the end
-# 'avg_comment_per_play_ratio': the average percentage of viewers who commented on a video in the comments section beneath it
-# 'avg_like_per_play_ratio': the average percentage of viewers who gave likes to a video
-# 'avg_follow_per_play_ratio': he average percentage of viewers who chose to follow provider i while watching a video
+# Variables in the dataset first_logging_consumption:
+# 'author_id': A provider's id
+# 'treatment': Whether a provider was in the treatment condition (1), versus the control condition (0)
+# 'sum_play_cnt': The total number of views a provider engendered that could be attributed to videos that provider uploaded on the first reception day 
+# 'avg_complete_per_play_ratio': For a provider's videos uploaded on the reception day, the average percentage of times viewers watched a video until the end 
+# 'avg_comment_per_play_ratio': For a provider's videos uploaded on the reception day, the average percentage of viewers who commented on a video in the comments section beneath it 
+# 'avg_like_per_play_ratio': For a provider's videos uploaded on the reception day, the average percentage of viewers who gave likes to a video
+# 'avg_follow_per_play_ratio': For a provider's videos uploaded on the reception day, the average percentage of viewers who chose to follow provider i while watching a video
 
 
 # In[12]:
@@ -143,24 +151,19 @@ first_logging_consumption[['sum_play_cnt', 'avg_complete_per_play_ratio',
 
 
 print(first_diffusion.columns)
+# Variables in the dataset first_diffusion:
 # 'author_id': user id of a provider
 # 'treatment': whether a provider was in the treatment condition, versus the control condition
 # 'nudges_to_others_logging_day': the number of social nudges sent by each provider i to other providers on Day 1 (the first reception day)
 # 'nudges_to_others_next_day_1': the number of social nudges sent by each provider i to other providers on Day 2
 # 'nudges_to_others_next_day_2': the number of social nudges sent by each provider i to other providers on Day 3
-# 'nudges_to_others_logging_day_per_link'
-# 'nudges_to_others_next_day_1_per_link'
-# 'nudges_to_others_next_day_2_per_link'
 
 
 # In[14]:
 
 
 first_diffusion[['nudges_to_others_logging_day',
-       'nudges_to_others_next_day_1', 'nudges_to_others_next_day_2',
-       'nudges_to_others_logging_day_per_link',
-       'nudges_to_others_next_day_1_per_link',
-       'nudges_to_others_next_day_2_per_link']].describe()
+       'nudges_to_others_next_day_1', 'nudges_to_others_next_day_2']].describe()
 
 
 # ## Create new variables
@@ -181,7 +184,17 @@ first_author_feature['author_gender_binary'] = first_author_feature['author_gend
 # In[17]:
 
 
-# winsorize variable
+first_diffusion = first_diffusion.merge(first_author_feature[['author_id', 'author_follow_cnt']], how = 'left')
+for col in['logging_day', 
+       'next_day_1',  'next_day_2']:
+    col_per_link = 'nudges_to_others_' + col + '_per_link' 
+    first_diffusion[col_per_link] = first_diffusion['nudges_to_others_' + col]/first_diffusion['author_follow_cnt']
+
+
+# In[18]:
+
+
+# winsorize variable sum_play_cnt
 col = 'sum_play_cnt'
 win_col = 'wins_'+col
 first_logging_consumption[win_col] = first_logging_consumption[col]
@@ -190,10 +203,10 @@ print(win_col+'_cut', '=', cut_point)
 first_logging_consumption.loc[first_logging_consumption[win_col] > cut_point, win_col] = cut_point
 
 
-# In[18]:
+# In[19]:
 
 
-# winsorize variable
+# winsorize variable nudges_to_others
 for col in ['nudges_to_others_logging_day', 
        'nudges_to_others_next_day_1',  'nudges_to_others_next_day_2']:
     win_col = 'wins_'+col
@@ -203,7 +216,7 @@ for col in ['nudges_to_others_logging_day',
     first_diffusion.loc[first_diffusion[win_col] > cut_point, win_col] = cut_point
 
 
-# In[19]:
+# In[20]:
 
 
 # standardize variable
@@ -212,7 +225,7 @@ for col in ['author_follow_cnt','author_fans_cnt','upload_days_a_week_prior','up
     first_author_feature[stand_col] = first_author_feature[col]/first_author_feature[col].std()
 
 
-# In[20]:
+# In[21]:
 
 
 # standardize variable
@@ -222,7 +235,7 @@ for col in ['photo_id_cnt_fillzero_logging_day', 'photo_id_cnt_fillzero_next_day
     first_production[stand_col] = first_production[col]/first_production[col].std()
 
 
-# In[21]:
+# In[22]:
 
 
 # standardize variable
@@ -231,7 +244,7 @@ for col in ['his_like_per_play_2018']:
     first_author_historic_consumption[stand_col] = first_author_historic_consumption[col]/first_author_historic_consumption[col].std()
 
 
-# In[22]:
+# In[23]:
 
 
 # standardize variable
@@ -242,7 +255,7 @@ for col in ['wins_sum_play_cnt', 'avg_complete_per_play_ratio',
     first_logging_consumption[stand_col] = first_logging_consumption[col]/first_logging_consumption[col].std()
 
 
-# In[23]:
+# In[24]:
 
 
 # standardize variable
@@ -252,11 +265,11 @@ for col in ['wins_nudges_to_others_logging_day', 'wins_nudges_to_others_next_day
     first_diffusion[stand_col] = first_diffusion[col]/first_diffusion[col].std()
 
 
-# # Section 3
+# # Section 3.2 Data and Randomization Check
 
 # ### Table 1 Randomization Check
 
-# In[24]:
+# In[25]:
 
 
 # Two-sample proportion test for Proportion of Females 
@@ -276,7 +289,7 @@ chi2, p, dof, ex = chi2_contingency(female_proportion)
 print('chi2:', chi2, ';', 'p:', p)
 
 
-# In[25]:
+# In[26]:
 
 
 # T-tests for number of users who were following them (``number of followers") on the day prior to the experiment, 
@@ -311,9 +324,9 @@ for col in outcomes:
     print(outcome, obs1, obs0, '&', '%.4f'%mean1, '&', '%.4f'%mean0, '&', '%.2f'%pvalue, '%.4f'%std1, '%.4f'%std0, '%.4f'%(mean1-mean0), '%.4f'%((mean1-mean0)/mean0))
 
 
-# # Section 4 
+# # Section 4 Direct Effects of Social Nudges on Content Production
 
-# In[26]:
+# In[27]:
 
 
 first_production['photo_id_cnt_fillzero_logging_day_conditional_uploding'] = first_production['photo_id_cnt_fillzero_logging_day']
@@ -325,9 +338,9 @@ first_production.loc[first_production['is_upload_logging_day']==0, 'stand_photo_
 first_production = first_production.merge(first_nudge_feature, how = 'left')
 
 
-# Table 2
+# ### Table 2 Direct Effects of Social Nudges on Content Production on the First Reception Day
 
-# In[27]:
+# In[28]:
 
 
 # Table 2; using raw data
@@ -361,7 +374,7 @@ print('relative effect size:', '{:.2%}'.format(mod4.params['treatment']/df[df['t
 print('relative effect size:', '{:.2%}'.format((mod4.params['treatment']+mod4.params['treatment:is_bi_follow'])/df[df['treatment']==0]['photo_id_cnt_fillzero_logging_day'].mean() ) )
 
 
-# In[28]:
+# In[29]:
 
 
 # Table 2; using standardized data
@@ -392,16 +405,16 @@ print('relative effect size:', '{:.2%}'.format(mod4.params['treatment']/df[df['t
 print('relative effect size:', '{:.2%}'.format((mod4.params['treatment']+mod4.params['treatment:is_bi_follow'])/df[df['treatment']==0]['stand_photo_id_cnt_fillzero_logging_day'].mean() ) )
 
 
-# Table 3
+# ### Table 3 Effects of Social Nudges on Video Consumption and Quality
 
-# In[29]:
+# In[30]:
 
 
 first_logging_consumption = first_logging_consumption.merge(first_author_historic_consumption,                                                                           how='left')
 first_logging_consumption = first_logging_consumption.merge(first_production[['author_id','is_upload_logging_day']], how='left')
 
 
-# In[30]:
+# In[31]:
 
 
 # Table 3; using raw data
@@ -451,7 +464,7 @@ print('panel B column (2):')
 print(mod7.get_robustcov_results().summary2(float_format="%.5f"))
 
 
-# In[31]:
+# In[32]:
 
 
 # Table 3; using standardized data
@@ -502,10 +515,12 @@ print('panel B column (2):')
 print(mod7.get_robustcov_results().summary2(float_format="%.5f"))
 
 
-# In[32]:
+# Footnote 11
+
+# In[33]:
 
 
-# winsorize variable; robustness check at the 99th percentile of nonzero values
+# robustness check of winsorizing sum_play_cnt at the 99th percentile of nonzero values 
 col = 'sum_play_cnt'
 win_col = 'wins_'+col+'_99th'
 first_logging_consumption[win_col] = first_logging_consumption[col]
@@ -516,11 +531,13 @@ first_logging_consumption.loc[first_logging_consumption[win_col] > cut_point, wi
 first_logging_consumption['stand_wins_sum_play_cnt_99th'] = first_logging_consumption['wins_sum_play_cnt_99th']/first_logging_consumption['wins_sum_play_cnt_99th'].std()
 
 mod1 = sm.OLS.from_formula('stand_wins_sum_play_cnt_99th ~ 1 + treatment', data=first_logging_consumption).fit()
+print(mod1.get_robustcov_results().summary2(float_format="%.5f"))
+print('relative effect size:', '{:.2%}'.format(mod1.params['treatment']/mod1.params['Intercept']) )
 
 
-# Table 4
+# ### Table 4 Over-Time Direct Effects of Social Nudges on Content Production
 
-# In[33]:
+# In[34]:
 
 
 # Table 4; using raw data
@@ -553,10 +570,10 @@ print(mod4.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod4.params['treatment']/mod4.params['Intercept']) )
 
 
-# In[34]:
+# In[35]:
 
 
-# Table 4; using std data
+# Table 4; using standardized data
 
 df = first_production
 
@@ -586,17 +603,17 @@ print(mod4.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod4.params['treatment']/mod4.params['Intercept']) )
 
 
-# # Section 5
+# # Section 5 Indirect Effects of Social Nudges on Production via Nudge Diffusion
 
-# In[35]:
+# In[36]:
 
 
 first_diffusion = first_diffusion.merge(first_nudge_feature, how = 'left')
 
 
-# Table 5
+# ### Table 5 Effect of Social Nudges on Nudge Diffusion on the First Reception Day
 
-# In[36]:
+# In[37]:
 
 
 # Table 5; using raw data
@@ -618,10 +635,10 @@ print('relative effect size:', '{:.2%}'.format(mod2.params['treatment']/df[df['t
 print('relative effect size:', '{:.2%}'.format((mod2.params['treatment']+mod2.params['treatment:is_bi_follow'])/df[df['treatment']==0]['wins_nudges_to_others_logging_day'].mean() ) )
 
 
-# In[37]:
+# In[38]:
 
 
-# Table 5; using std data
+# Table 5; using standardized data
 
 df = first_diffusion
 
@@ -640,9 +657,9 @@ print('relative effect size:', '{:.2%}'.format(mod2.params['treatment']/df[df['t
 print('relative effect size:', '{:.2%}'.format((mod2.params['treatment']+mod2.params['treatment:is_bi_follow'])/df[df['treatment']==0]['stand_wins_nudges_to_others_logging_day'].mean() ) )
 
 
-# Table 6
+# ### Table 6 Effects of Social Nudges on Nudge Diffusion Over Time
 
-# In[38]:
+# In[39]:
 
 
 # Table 6; using raw data
@@ -669,10 +686,10 @@ print(mod3.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod3.params['treatment']/mod3.params['Intercept']) )
 
 
-# In[39]:
+# In[40]:
 
 
-# Table 6; using std data
+# Table 6; using standardized data
 
 df = first_diffusion
 
@@ -696,27 +713,43 @@ print(mod3.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod3.params['treatment']/mod3.params['Intercept']) )
 
 
-# ## Appendix A Robustness Checks of the Main Results From the First Social-Nudge Experiment
+# # Appendix A Robustness Checks of the Main Results From the First Social-Nudge Experiment
 
-# Table 10
-# 
-# Effects of Social Nudges Among All Providers Who Were Sent at Least One Social Nudge in the
-# First Social-Nudge Experiment
+# ### Table 10 Effects of Social Nudges Among All Providers Who Were Sent at Least One Social Nudge in the First Social-Nudge Experiment
 
-# In[40]:
+# In[41]:
 
 
 first_production_no_prior_nudge_limit = pd.read_csv('social_nudge_first_exp_production_no_prior_nudge_limit.csv')
-first_production_no_prior_nudge_limit['stand_photo_id_cnt_fillzero'] = first_production_no_prior_nudge_limit['photo_id_cnt_fillzero']/first_production_no_prior_nudge_limit['photo_id_cnt_fillzero'].std()
 
 
-# In[41]:
+# In[42]:
+
+
+print(first_production_no_prior_nudge_limit.columns)
+# Variables in the dataset first_production_no_prior_nudge_limit:
+# 'author_id': A provider's id 
+# 'treatment': Whether a provider was in the treatment condition (1), versus the control condition (0)
+# 'is_upload': Whether a provider uploaded any videos on the first reception day
+# 'photo_id_cnt_fillzero': A provider’s number of videos uploaded on the first reception day
+
+
+# In[43]:
 
 
 first_diffusion_no_prior_nudge_limit = pd.read_csv('social_nudge_first_exp_diffusion_no_prior_nudge_limit.csv')
 
 
-# In[42]:
+# In[44]:
+
+
+print(first_diffusion_no_prior_nudge_limit.columns)
+# Variables in the dataset first_diffusion_no_prior_nudge_limit: 
+# 'author_id': A provider's id 
+# 'nudges_to_others_logging_day':  A provider’s number of social nudges sent by a provider to other providers on the first reception day
+
+
+# In[45]:
 
 
 # winsorize variable
@@ -728,20 +761,21 @@ for col in ['nudges_to_others_logging_day']:
     first_diffusion_no_prior_nudge_limit.loc[first_diffusion_no_prior_nudge_limit[win_col] > cut_point, win_col] = cut_point
 
 
-# In[43]:
+# In[46]:
 
 
 # standarize variable
+first_production_no_prior_nudge_limit['stand_photo_id_cnt_fillzero'] = first_production_no_prior_nudge_limit['photo_id_cnt_fillzero']/first_production_no_prior_nudge_limit['photo_id_cnt_fillzero'].std()
 first_diffusion_no_prior_nudge_limit['stand_wins_nudges_to_others_logging_day'] = first_diffusion_no_prior_nudge_limit['wins_nudges_to_others_logging_day']/first_diffusion_no_prior_nudge_limit['wins_nudges_to_others_logging_day'].std()
 
 
-# In[44]:
+# In[47]:
 
 
 first_no_prior_nudge_limit = first_diffusion_no_prior_nudge_limit.merge(first_production_no_prior_nudge_limit, how = 'left')
 
 
-# In[45]:
+# In[48]:
 
 
 # Table 10; using raw data
@@ -761,10 +795,10 @@ print(mod2.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod2.params['treatment']/mod2.params['Intercept']) )
 
 
-# In[46]:
+# In[49]:
 
 
-# Table 10; using std data
+# Table 10; using standardized data
 
 mod1 = sm.OLS.from_formula('stand_photo_id_cnt_fillzero  ~ 1 + treatment', data=df).fit()
 mod2 = sm.OLS.from_formula('stand_wins_nudges_to_others_logging_day ~ 1 + treatment', data=df).fit()
@@ -780,18 +814,33 @@ print(mod2.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod2.params['treatment']/mod2.params['Intercept']) )
 
 
-# Table 11
-# 
-# Effects of Social Nudges on Content Production Within 24 Hours Following the First Nudge
+# ### Table 11 Effects of Social Nudges on Content Production Within 24 Hours Following the First Nudge
 
-# In[47]:
+# In[50]:
 
 
 first_production_in_24h = pd.read_csv('social_nudge_first_exp_production_in_24h.csv')
+
+
+# In[51]:
+
+
+print(first_production_in_24h.columns)
+# Variables in the dataset first_production_in_24h
+# 'author_id': A provider's id 
+# 'treatment': Whether a provider was in the treatment condition (1), versus the control condition (0)
+# 'is_upload': Whether a provider uploaded any videos during 24 hours since the first social nudge
+# 'photo_id_cnt_fillzero': A provider's number of videos uploaded during 24 hours since the first social nudge
+
+
+# In[52]:
+
+
+# standardize data
 first_production_in_24h['stand_photo_id_cnt_fillzero'] = first_production_in_24h['photo_id_cnt_fillzero']/first_production_in_24h['photo_id_cnt_fillzero'].std()
 
 
-# In[48]:
+# In[53]:
 
 
 # Table 11; using raw data
@@ -811,10 +860,10 @@ print(mod2.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod2.params['treatment']/mod2.params['Intercept']) )
 
 
-# In[49]:
+# In[54]:
 
 
-# Table 11; using std data
+# Table 11; using standardized data
 df = first_production_in_24h
 
 mod1 = sm.OLS.from_formula('stand_photo_id_cnt_fillzero  ~ 1 + treatment', data=df).fit()
@@ -831,15 +880,51 @@ print(mod2.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod2.params['treatment']/mod2.params['Intercept']) )
 
 
-# ## Appendix B The Second Social-Nudge Experiment as a Replication
+# # Appendix B The Second Social-Nudge Experiment as a Replication
 
-# In[50]:
+# In[55]:
 
 
 second_exp = pd.read_csv('social_nudge_second_exp_production_diffusion.csv')
 
 
-# In[51]:
+# In[56]:
+
+
+print(second_exp.columns)
+# Variables in the dataset second_exp:
+# 'author_id': A provider's id  
+# 'treatment': Whether a provider was in the treatment condition (1), versus the control condition (0) 
+# 'is_upload_logging_day': Whether a provider uploaded any videos on the first reception day (or Day 1)
+# 'photo_id_cnt_fillzero_logging_day': A provider's number of videos uploaded on the first reception day (or Day 1)
+# 'is_upload_next_day_1': Whether a provider uploaded any videos on the first day after the first reception day (or Day 2)
+# 'photo_id_cnt_fillzero_next_day_1': A provider's number of videos uploaded on the first day after the first reception day (or Day 2) 
+# 'is_upload_next_day_2': Whether a provider uploaded any videos on Day 3
+# 'photo_id_cnt_fillzero_next_day_2': A provider's number of videos uploaded on Day 3
+# 'is_upload_next_day_3': Whether a provider uploaded any videos on Day 4
+# 'photo_id_cnt_fillzero_next_day_3': A provider's number of videos uploaded on Day 4
+# 'is_upload_next_day_4': Whether a provider uploaded any videos on Day 5
+# 'photo_id_cnt_fillzero_next_day_4': A provider's number of videos uploaded on Day 5
+# 'logging_msg_cnt': A provider’s number of social nudges received on the first reception day 
+# 'nudges_to_others_logging_day': A provider’s number of social nudges sent by a provider to other providers on the first reception day (or Day 1)  
+# 'nudges_to_others_next_day_1':  A provider’s number of social nudges sent by a provider to other providers on Day 2
+# 'nudges_to_others_next_day_2': A provider’s number of social nudges sent by a provider to other providers on Day 3
+# 'nudges_to_others_next_day_3': A provider’s number of social nudges sent by a provider to other providers on Day 4
+# 'nudges_to_others_next_day_4': A provider’s number of social nudges sent by a provider to other providers on Day 5
+# 'author_follow_cnt':
+
+
+# In[57]:
+
+
+first_diffusion = first_diffusion.merge(first_author_feature[['author_id', 'author_follow_cnt']], how = 'left')
+for col in['logging_day', 
+       'next_day_1',  'next_day_2']:
+    col_per_link = 'nudges_to_others_' + col + '_per_link' 
+    second_exp[col_per_link] = second_exp['nudges_to_others_' + col]/second_exp['author_follow_cnt']
+
+
+# In[58]:
 
 
 # winsorize variable
@@ -853,7 +938,7 @@ for col in ['nudges_to_others_logging_day',
     second_exp.loc[second_exp[win_col] > cut_point, win_col] = cut_point
 
 
-# In[52]:
+# In[59]:
 
 
 # standardize variable
@@ -864,15 +949,12 @@ for col in ['wins_nudges_to_others_logging_day', 'wins_nudges_to_others_next_day
            'photo_id_cnt_fillzero_next_day_2', 'photo_id_cnt_fillzero_next_day_3',
            'photo_id_cnt_fillzero_next_day_4']:
     stand_col = 'stand_'+col
-    # second_exp[stand_col] = StandardScaler().fit_transform(second_exp[[col]].values)
     second_exp[stand_col] = second_exp[col]/second_exp[col].std()
 
 
-# ## Table 12
-# 
-# Over-Time Direct Effects of Social Nudges on Content Production (Replicated)
+# ### Table 12 Over-Time Direct Effects of Social Nudges on Content Production (Replicated)
 
-# In[53]:
+# In[60]:
 
 
 # Table 12; using raw data
@@ -905,10 +987,10 @@ print(mod4.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod4.params['treatment']/mod4.params['Intercept']) )
 
 
-# In[54]:
+# In[61]:
 
 
-# Table 12; using std data
+# Table 12; using standardized data
 
 df = second_exp
 
@@ -938,11 +1020,9 @@ print(mod4.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod4.params['treatment']/mod4.params['Intercept']) )
 
 
-# Table 13
-# 
-# Over-Time Effects of Social Nudges on Nudge Diffusion (Replicated)
+# ### Table 13 Over-Time Effects of Social Nudges on Nudge Diffusion (Replicated)
 
-# In[55]:
+# In[62]:
 
 
 # Table 13; using raw data
@@ -981,10 +1061,10 @@ print(mod5.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod5.params['treatment']/mod5.params['Intercept']) )
 
 
-# In[56]:
+# In[63]:
 
 
-# Table 13; using std data
+# Table 13; using standardized data
 
 df = second_exp
 
@@ -1020,22 +1100,57 @@ print(mod5.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod5.params['treatment']/mod5.params['Intercept']) )
 
 
-# ## Appendix C Additional Analyses about the Direct Effects of Social Nudges
+# # Appendix C Additional Analyses about the Direct Effects of Social Nudges
 
-# In[57]:
+# In[64]:
 
 
 first_private_message = pd.read_csv('social_nudge_first_exp_private_message.csv')
+
+
+# In[65]:
+
+
+print(first_private_message.columns)
+# Variables in the dataset:
+# 'author_id': A provider's id  
+# 'treatment': Whether a provider was in the treatment condition (1), versus the control condition (0) 
+# 'whether_follower_send_author_msg_exp_time': Whether the follower who sent a provider the first social nudge 
+#    in the experiment (i.e.,the first social-nudge sender) also sent any private messages to that provider between 
+#    the start date of the experiment and that provider's first reception day (including both ends)
+
+
+# In[66]:
+
+
 first_control_group_did = pd.read_csv('social_nudge_first_exp_control_group_did.csv')
 
 
-# In[58]:
+# In[67]:
+
+
+print(first_control_group_did.columns)
+# Variables in the dataset:
+# 'author_id': A provider's id  
+# 'treatment': Whether a provider was in the treatment condition (1), versus the control condition (0) 
+# 'post': 1 if an observation corresponded to the first reception day and 0 if
+#    the observation corresponded to the day before the experiment
+# 'whether_follower_send_author_msg_exp_time': Whether the follower who sent a provider the first social nudge 
+#    in the experiment (i.e.,the first social-nudge sender) also sent any private messages to that provider between 
+#    the start date of the experiment and that provider's first reception day (including both ends)
+# 'is_upload': Whether a provider uploaded any videos on the corresponding day 
+#    (either the first reception day or the day before the experiment) 
+# 'photo_id_cnt_fillzero': A provider's number of videos uploaded on the corresponding day 
+#.   (either the first reception day or the day before the experiment)
+
+
+# In[68]:
 
 
 first_control_group_did['stand_photo_id_cnt_fillzero'] = first_control_group_did['photo_id_cnt_fillzero']/first_control_group_did['photo_id_cnt_fillzero'].std()
 
 
-# In[59]:
+# In[69]:
 
 
 first_production = first_production.merge(first_private_message, how = 'left')
@@ -1045,7 +1160,7 @@ first_production = first_production.merge(first_private_message, how = 'left')
 # 
 # The Role of Private Messages in Content Production Among Control Provider
 
-# In[60]:
+# In[70]:
 
 
 # table 14; raw data
@@ -1069,10 +1184,10 @@ print('relative effect size:', '{:.2%}'.format(mod3.params['treatment']/mod3.par
 
 
 
-# In[61]:
+# In[71]:
 
 
-# table 14; std data
+# table 14; standardized data
 mod1 = sm.OLS.from_formula('stand_photo_id_cnt_fillzero ~ 1 + whether_follower_send_author_msg_exp_time*post', data=first_control_group_did).fit(cov_type='cluster', cov_kwds={'groups': first_control_group_did['author_id']})
 mod2 = sm.OLS.from_formula('stand_photo_id_cnt_fillzero_logging_day ~ 1 + treatment', data=first_production[first_production['whether_follower_send_author_msg_exp_time']==1]).fit()
 mod3 = sm.OLS.from_formula('stand_photo_id_cnt_fillzero_logging_day ~ 1 + treatment', data=first_production[first_production['whether_follower_send_author_msg_exp_time']==0]).fit()
@@ -1092,18 +1207,26 @@ print(mod3.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod3.params['treatment']/mod3.params['Intercept']) )
 
 
-# Table 15
-# 
-# Effects of Social Nudges on Content Production With or Without Controlling for the Role of Likes
-# and Comments
+# ### Table 15 Effects of Social Nudges on Content Production With or Without Controlling for the Role of Likes and Comments
 
-# In[62]:
+# In[72]:
 
 
 first_like_and_comment = pd.read_csv('social_nudge_first_exp_like_and_comment.csv')
 
 
-# In[63]:
+# In[73]:
+
+
+print(first_like_and_comment.columns)
+# Variables in the dataset first_like_and_comment
+# 'author_id': A provider's id  
+# 'treatment': Whether a provider was in the treatment condition (1), versus the control condition (0) 
+# 'sum_like_cnt_logging_day': The number of likes obtained by a provider on the first reception day
+# 'sum_comment_cnt_logging_day': The number of comments obtained by a provider on the first reception day 
+
+
+# In[74]:
 
 
 # winsorize variable
@@ -1115,7 +1238,7 @@ for col in ['sum_like_cnt_logging_day','sum_comment_cnt_logging_day'] :
     first_like_and_comment.loc[first_like_and_comment[win_col] > cut_point, win_col] = cut_point
 
 
-# In[64]:
+# In[75]:
 
 
 # standardize variable
@@ -1124,16 +1247,16 @@ for col in ['wins_sum_like_cnt_logging_day', 'wins_sum_comment_cnt_logging_day']
     first_like_and_comment[stand_col] = first_like_and_comment[col]/first_like_and_comment[col].std()
 
 
-# In[65]:
+# In[76]:
 
 
 first_production = first_production.merge(first_like_and_comment, how = 'left')
 
 
-# In[66]:
+# In[77]:
 
 
-# Table 15; raw data
+# Table 15; using raw data
 
 df = first_production
 mod1 = sm.OLS.from_formula('wins_sum_like_cnt_logging_day ~ 1 + treatment', data=df).fit()
@@ -1202,10 +1325,10 @@ print(mod6.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod6.params['treatment']/mod3.params['Intercept']) )
 
 
-# In[67]:
+# In[78]:
 
 
-# Table 15; std data
+# Table 15; using standardized data
 
 df = first_production
 mod1 = sm.OLS.from_formula('stand_wins_sum_like_cnt_logging_day ~ 1 + treatment', data=df).fit()
@@ -1274,18 +1397,45 @@ print(mod6.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod6.params['treatment']/mod3.params['Intercept']) )
 
 
-# Table 16
-# 
-# Users Who Sent Social Nudges Did Not Reduce the Usage of Likes/Comment
+# ### Table 16 Users Who Sent Social Nudges Did Not Reduce the Usage of Likes/Comment
 
-# In[68]:
+# In[79]:
 
 
 like_comment_cannibalize_data = pd.read_csv("social_nudge_first_exp_like_comment_cannibalize_data.csv")
+
+
+# In[80]:
+
+
+print(like_comment_cannibalize_data.columns)
+# Variables in the dataset like_comment_cannibalize_data:
+# 'user_id': Id of a user among a random sample of $10, 000, 000$ viewers who logged onto Platform O between 
+#    December 1, 2021 and December 7, 2021 for the cannibalization analyses
+# 'gender': Gender of a user
+# 'age_range': The range of a user's age (0-12, 12-17, 18-23, 24-30, 31-40, 41-49, and 50+)
+# 'fre_community_type': A user's residential community type (i.e., countryside, town, or urban area)
+# 'fre_city_level': The tier of city a user lives in (e.g., first tier, second tier, etc.)
+# 'follow_user_num': The number of users a user was following on November 30, 2021 
+# 'fans_user_num': The number of followers a user had on November 30, 2021
+# 'prior_online_duration': How long she watched videos Platform O in the previous week,
+# 'prior_photo_play_duration': How long a user was active on Platform O in the previous week (November 24—November 30, 2021)
+# 'prior_is_photo_author': Whether a user had uploaded any video by November 30, 2021
+# 'prior_is_social_ban': Whether a user was banned from social interactions (such as marking likes and sending comments)
+# 'sending_nudge_cnt': The number of social nudges sent by a viewer during December 1, 2021 and December 7, 2021
+# 'sending_like_cnt': The number of likes marked by a user during December 1, 2021 and December 7, 2021 
+# 'sending_comment_cnt': The number of comments left by a user during December 1, 2021 and December 7, 2021 
+# 'prior_sending_like_cnt': The number of likes marked by a user during the prior week
+# 'prior_sending_comment_cnt': The number of comments left by a user during the prior week
+
+
+# In[81]:
+
+
 like_comment_cannibalize_data['treatment'] = (like_comment_cannibalize_data['sending_nudge_cnt']>=1).astype('int')
 
 
-# In[69]:
+# In[82]:
 
 
 print(like_comment_cannibalize_data['age_range'].value_counts())
@@ -1293,10 +1443,10 @@ print(like_comment_cannibalize_data['fre_community_type'].value_counts())
 print(like_comment_cannibalize_data['fre_city_level'].value_counts())
 
 
-# In[70]:
+# In[83]:
 
 
-# matching variables
+# matching variables to construct comparabel treatment and control groups
 feature_cols = [
 'gender',
 'age_range',
@@ -1318,7 +1468,7 @@ match_cem = matching(df = like_comment_cannibalize_data,
 df_matched_cem = match_cem.cem()
 
 
-# In[71]:
+# In[84]:
 
 
 # raw data
@@ -1337,7 +1487,7 @@ mod2 = sm.OLS.from_formula('sending_comment_cnt ~ 1 + treatment*post', data=matc
 print(mod2.summary2(float_format="%.6f"))
 
 
-# In[72]:
+# In[85]:
 
 
 # standardize variable
@@ -1346,7 +1496,7 @@ for col in ['sending_like_cnt', 'sending_comment_cnt']:
     matched_like_comment_cannibalize_data[stand_col] = matched_like_comment_cannibalize_data[col]/matched_like_comment_cannibalize_data[col].std()
 
 
-# In[73]:
+# In[86]:
 
 
 # table 16; std data
@@ -1357,20 +1507,18 @@ mod2 = sm.OLS.from_formula('stand_sending_comment_cnt ~ 1 + treatment*post', dat
 print(mod2.summary2(float_format="%.6f"))
 
 
-# Table 17
-# 
-# Direct Effects of Social Nudge Across Providers With Different Historical Production Levels
+# ### Table 17 Direct Effects of Social Nudge Across Providers With Different Historical Production Levels
 
-# In[74]:
+# In[87]:
 
 
 first_production = first_production.merge(first_author_feature, how = 'left')
 
 
-# In[75]:
+# In[88]:
 
 
-# raw data
+# Table 17; using raw data
 # Low-Productivity Providers; Medium-Productivity Providers; High-Productivity Providers
 
 sub_data = first_production
@@ -1402,10 +1550,10 @@ print('pvalue:', '%.4f'%res.pvalues['treatment'])
 print('res:', '{:.2%}'.format(res.params['treatment']/res.params['Intercept']) )
 
 
-# In[76]:
+# In[89]:
 
 
-# std data
+# Table 17; using standardized data
 # Low-Productivity Providers; Medium-Productivity Providers; High-Productivity Providers
 
 print('##########')
@@ -1431,34 +1579,44 @@ print('pvalue:', '%.4f'%res.pvalues['treatment'])
 print('res:', '{:.2%}'.format(res.params['treatment']/res.params['Intercept']) )
 
 
-# Table 18
-# 
-# Comparison of Social Nudge and Platform-Initiated Nudge
+# ### Table 18 Comparison of Social Nudge and Platform-Initiated Nudge
 
-# In[77]:
+# In[90]:
 
 
 platform_nudge_production = pd.read_csv('platform_nudge_production.csv')
 
 
-# In[78]:
+# In[91]:
+
+
+print(platform_nudge_production.columns)
+# Variables in the dataset platform_nudge_production:
+# 'author_id': A provider's id 
+# 'treatment': Whether a provider was in the treatment condition (1), versus the control condition (0)  
+# 'photo_id_cnt_fillzero_logging_day': A provider’s number of videos uploaded on the first reception day
+# 'photo_id_cnt_fillzero_next_day_1': A provider’s number of videos uploaded on the first day after the first reception day (or Day 2)
+# 'photo_id_cnt_fillzero_next_day_2': A provider’s number of videos uploaded on the second day after the first reception day (or Day 3)
+# 'photo_id_cnt_fillzero_next_day_3': A provider’s number of videos uploaded on the third day after the first reception day (or Day 4)
+
+
+# In[92]:
 
 
 overlap_author = platform_nudge_production[['author_id']].merge(first_production[['author_id']], how = 'inner')
 
 
-# In[79]:
+# In[93]:
 
 
 # standardize variable
 for col in ['photo_id_cnt_fillzero_logging_day', 'photo_id_cnt_fillzero_next_day_1', 
            'photo_id_cnt_fillzero_next_day_2', 'photo_id_cnt_fillzero_next_day_3']:
     stand_col = 'stand_'+col
-    # platform_nudge_production[stand_col] = StandardScaler().fit_transform(platform_nudge_production[[col]].values)
     platform_nudge_production[stand_col] = platform_nudge_production[col]/platform_nudge_production[col].std()
 
 
-# In[80]:
+# In[94]:
 
 
 # Table 18; using raw data
@@ -1499,10 +1657,10 @@ print(mod6.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod6.params['treatment']/mod6.params['Intercept']) )
 
 
-# In[81]:
+# In[95]:
 
 
-# Table 18; using std data
+# Table 18; using standardized data
 
 df = platform_nudge_production
 
@@ -1540,7 +1698,9 @@ print(mod6.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod6.params['treatment']/mod6.params['Intercept']) )
 
 
-# In[84]:
+# ### Figure 4
+
+# In[96]:
 
 
 # Figure 4
@@ -1624,25 +1784,41 @@ for i in range(4):
     #plt.savefig('.svg', bbox_inches='tight', dpi=100, format="svg")
 
 
-# ## Appendix E Social Network Model Estimation Details
+# # Appendix E Social Network Model Estimation Details
 # 
 
-# Table 19
+# ### Table 19 The Results of a Logistic Regression Model Predicting Social-Nudge Incidence
 
-# In[85]:
+# In[97]:
 
 
 intrinsic_motivation_control_group = pd.read_csv('social_nudge_first_exp_intrinsic_motivation_control_group.csv')
 
 
-# In[86]:
+# In[98]:
+
+
+print(intrinsic_motivation_control_group.columns)
+# Variables in the dataset intrinsic_motivation_control_group
+# 'target_id': e_d's id 
+# 'source_id': e_o's id
+# 'author_follow_cnt':e_d’s number of following
+# 'author_fans_cnt': e_d’s number of followers
+# 'source_follow_cnt': e_o’s number of following
+# 'source_fans_cnt':  e_o’s number of followers 
+# 'whether_author_follow_source': Whether e_d was also following e_o
+# 'sending_nudge_cnt': The number of social nudges sent by e_o to e_d
+# 'author_daily_upload_cnt_h30d': e_d's average number of videos uploaded per day across the 30 days before the experiment
+
+
+# In[99]:
 
 
 intrinsic_motivation_control_group['whether_sending_nudge'] = (intrinsic_motivation_control_group['sending_nudge_cnt'] >= 1).astype('int')
 intrinsic_motivation_control_group.fillna(0, inplace = True)
 
 
-# In[87]:
+# In[100]:
 
 
 # describle variables
@@ -1651,7 +1827,7 @@ for col in ['sending_nudge_cnt', 'whether_sending_nudge']:
     print(intrinsic_motivation_control_group[col].value_counts())
 
 
-# In[88]:
+# In[101]:
 
 
 # data processing  
@@ -1679,7 +1855,7 @@ for col in ['author_follow_cnt', 'author_fans_cnt', 'source_follow_cnt', 'source
     intrinsic_motivation_control_group[log_col] = np.log(intrinsic_motivation_control_group[col]+1)# data processing (cutting, winsorizing, log-transforming)
 
 
-# In[89]:
+# In[102]:
 
 
 # logistic regression
@@ -1695,7 +1871,7 @@ print('mu_coef_whether_author_follow_source=', '%.10f'%res.params['whether_autho
 print('mu_coef_author_daily_upload_cnt_h30d=', '%.10f'%res.params['author_daily_upload_cnt_h30d'], 'exp coef = ', '%.6f'%np.exp(res.params['author_daily_upload_cnt_h30d']))
 
 
-# In[94]:
+# In[103]:
 
 
 # cross validation
@@ -1711,17 +1887,15 @@ print('accuracy = ',cv_results['test_accuracy'].mean())
 print('auc = ', cv_results['test_roc_auc'].mean())
 
 
-# Table 20
-# 
-# Over-Time Direct Effects of Receiving One Social Nudge on Content Production
+# ### Table 20 Over-Time Direct Effects of Receiving One Social Nudge on Content Production
 
-# In[95]:
+# In[104]:
 
 
 first_production = first_production.merge(first_author_feature, how='left')
 
 
-# In[96]:
+# In[105]:
 
 
 # Table 20; using raw data
@@ -1797,10 +1971,10 @@ print('coef of treatment:', '%.10f'%mod5.params['treatment'])
 p_25 = mod5.params['treatment']
 
 
-# In[97]:
+# In[106]:
 
 
-# Table 20; std data
+# Table 20; using standardized data
 
 df = first_production[first_production['logging_msg_cnt'] == 1]
 
@@ -1850,9 +2024,9 @@ print(mod4.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod4.params['treatment']/mod4.params['Intercept']) )
 
 
-# Table 8
+# ### Table 8 Estimation of Parameters in the Social Network Model  -- p and alpha_p
 
-# In[98]:
+# In[107]:
 
 
 # p; first experiment; based on absolute effect
@@ -1879,7 +2053,7 @@ print('alpha_p = ', '%.10f'%res.x[1])
 print('p/(1-alpha_p) = ', '%.10f'%(res.x[0]/(1-res.x[1])))
 
 
-# In[99]:
+# In[108]:
 
 
 # second experiment; based on absolute effect
@@ -1906,17 +2080,15 @@ print('alpha_p = ', '%.10f'%res.x[1])
 print('p/(1-alpha_p) = ', '%.10f'%(res.x[0]/(1-res.x[1])))
 
 
-# Table 21 
-# 
-# Over-Time Diffusion Effects of Receiving One Social Nudge
+# ### Table 21 Over-Time Diffusion Effects of Receiving One Social Nudge
 
-# In[100]:
+# In[109]:
 
 
 first_diffusion = first_diffusion.merge(first_author_feature, how='left')
 
 
-# In[101]:
+# In[110]:
 
 
 first_diffusion.loc[first_diffusion['author_follow_cnt'] == 0, 'nudges_to_others_logging_day_per_link'] = None
@@ -1924,7 +2096,7 @@ first_diffusion.loc[first_diffusion['author_follow_cnt'] == 0, 'nudges_to_others
 first_diffusion.loc[first_diffusion['author_follow_cnt'] == 0, 'nudges_to_others_next_day_1_per_link'] = None
 
 
-# In[102]:
+# In[111]:
 
 
 for col in ['nudges_to_others_logging_day_per_link', 
@@ -1934,7 +2106,7 @@ for col in ['nudges_to_others_logging_day_per_link',
     first_diffusion[stand_col] = first_diffusion[col]/first_diffusion[col].std()
 
 
-# In[103]:
+# In[112]:
 
 
 second_exp.loc[second_exp['author_follow_cnt'] == 0, 'nudges_to_others_logging_day_per_link'] = None
@@ -1942,7 +2114,7 @@ second_exp.loc[second_exp['author_follow_cnt'] == 0, 'nudges_to_others_next_day_
 second_exp.loc[second_exp['author_follow_cnt'] == 0, 'nudges_to_others_next_day_1_per_link'] = None
 
 
-# In[104]:
+# In[113]:
 
 
 for col in ['nudges_to_others_logging_day_per_link', 
@@ -1952,7 +2124,7 @@ for col in ['nudges_to_others_logging_day_per_link',
     second_exp[stand_col] = second_exp[col]/second_exp[col].std()
 
 
-# In[105]:
+# In[114]:
 
 
 # Table 21; using raw data
@@ -2007,10 +2179,10 @@ print('coef of treatment:', '%.10f'%mod3.params['treatment'])
 d_23 = mod3.params['treatment']
 
 
-# In[106]:
+# In[115]:
 
 
-# Table 21; std data
+# Table 21; using standardized data
 
 df = first_diffusion[(first_diffusion['logging_msg_cnt'] == 1) & (first_diffusion['author_follow_cnt'] > 0)]
 
@@ -2050,9 +2222,9 @@ print(mod3.get_robustcov_results().summary2(float_format="%.5f"))
 print('relative effect size:', '{:.2%}'.format(mod3.params['treatment']/mod3.params['Intercept']) )
 
 
-# Table 8
+# ### Table 8 Estimation of Parameters in the Social Network Model -- d and alpha_d
 
-# In[107]:
+# In[116]:
 
 
 # d; ; first experiment; based on absolute effect
@@ -2078,7 +2250,7 @@ print('alpha_d = ', '%.10f'%res.x[1])
 print('d/alpha_d = ', '%.10f'%((res.x[0]/10000)/res.x[1]))
 
 
-# In[108]:
+# In[117]:
 
 
 # d; ; second experiment; based on absolute effect
@@ -2106,7 +2278,9 @@ print('d/alpha_d = ', '%.10f'%((res.x[0]/10000)/res.x[1]))
 
 # ## Appendix G Data discloure
 
-# In[109]:
+# ### Tables 25--36
+
+# In[118]:
 
 
 # variables first appearing in table 1
@@ -2146,7 +2320,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[110]:
+# In[119]:
 
 
 # variables first appearing in  table 2
@@ -2186,7 +2360,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[111]:
+# In[120]:
 
 
 # variables first appearing in table 3
@@ -2226,7 +2400,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[112]:
+# In[121]:
 
 
 # variables first appearing in table 4
@@ -2266,7 +2440,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[113]:
+# In[122]:
 
 
 # variables first appearing in table 5 and table 6
@@ -2306,7 +2480,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[114]:
+# In[123]:
 
 
 # variables appearing in table 10
@@ -2345,7 +2519,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[115]:
+# In[124]:
 
 
 # variables appearing in table 11
@@ -2384,7 +2558,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[116]:
+# In[125]:
 
 
 # variables appearing in  table 12 and table 13
@@ -2430,7 +2604,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[117]:
+# In[126]:
 
 
 # variables appearing in  table 14
@@ -2451,7 +2625,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[118]:
+# In[127]:
 
 
 # variables appearing in table 14
@@ -2490,7 +2664,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[119]:
+# In[128]:
 
 
 # variables appearing in table 14
@@ -2529,7 +2703,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[120]:
+# In[129]:
 
 
 # variables appearing in table 15
@@ -2569,7 +2743,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[121]:
+# In[130]:
 
 
 # variables appearing in table 16
@@ -2633,7 +2807,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[122]:
+# In[131]:
 
 
 # variables appearing in table 17
@@ -2673,7 +2847,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[123]:
+# In[132]:
 
 
 # variables appearing in  table 17
@@ -2713,7 +2887,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[124]:
+# In[133]:
 
 
 # variables appearing in  table 17
@@ -2753,7 +2927,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[125]:
+# In[134]:
 
 
 # variables appearing in  table 18
@@ -2795,7 +2969,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[126]:
+# In[135]:
 
 
 # variables appearing in table 18
@@ -2835,7 +3009,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[127]:
+# In[136]:
 
 
 # variables appearing in  table 18
@@ -2875,7 +3049,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[128]:
+# In[137]:
 
 
 # variables appearing in Table 20
@@ -2918,7 +3092,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[129]:
+# In[138]:
 
 
 # variables appearing in Table 21
@@ -2960,7 +3134,7 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# In[130]:
+# In[139]:
 
 
 # variables appearing in Tables 20,21
@@ -3004,9 +3178,9 @@ for col in outcomes:
     print(outcome,':', '%.4f'%sub_data[outcome].quantile(0.01), '&', '%.4f'%sub_data[outcome].quantile(0.25), '&',           '%.4f'%sub_data[outcome].quantile(0.5), '&', '%.4f'%sub_data[outcome].quantile(0.75), '&',           '%.4f'%sub_data[outcome].quantile(0.99))
 
 
-# Correlation
+# ### Correlation between variables
 
-# In[131]:
+# In[140]:
 
 
 temp1 = first_production[['author_id', 'author_gender_binary', 'stand_author_fans_cnt', 'stand_author_follow_cnt', 'stand_upload_photo_cnt_a_week_prior',
@@ -3022,32 +3196,34 @@ temp3 = first_diffusion[['author_id','stand_wins_nudges_to_others_logging_day',
             'stand_wins_nudges_to_others_next_day_1','stand_wins_nudges_to_others_next_day_2']]
 
 
-# In[132]:
+# In[141]:
 
 
 sub_data = temp1.merge(temp2, how = 'left')
 sub_data = sub_data.merge(temp3, how = 'left')
 
 
-# In[133]:
+# In[142]:
 
 
 sub_data.drop(columns = ['author_id'], inplace=True)
 
 
-# In[134]:
+# In[143]:
 
 
 temp = sub_data.corr().reset_index()
 
 
-# In[135]:
+# In[144]:
 
 
 temp
 
 
-# In[136]:
+# ### Table 37
+
+# In[145]:
 
 
 col = sub_data.columns
