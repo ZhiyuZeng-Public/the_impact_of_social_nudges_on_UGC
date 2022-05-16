@@ -1,5 +1,5 @@
 # Code for the Paper -- The Impact of Social Nudges on User-Generated Content for Social Network Platforms
-Here we provide the code used in the paper, [*The Impact of Social Nudges on User-Generated Content for Social Network Platforms*](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3611571). You could contact the authors if you have any questions.
+Here the authors provide the code used in the paper, [*The Impact of Social Nudges on User-Generated Content for Social Network Platforms*](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3611571). You could contact the authors if you have any questions.
 
 All the code used to obtain the results in this paper is disclosed here. However, the authors are not allowed to reveal any datasets, as required by the platform which they collaborated with. Nevertheless, to help other scholars better understand the context and insights of this research, the authors have made an effort on data disclosure, and in the [online appendix of this paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3611571), they report the distributional information of the features and outcome variables studied in the paper, as well as that of the degrees of the sample network used in the paper.
 
